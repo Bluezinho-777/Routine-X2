@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/Routine-X-main/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/Routine-X-main/$1"
+    }
+  ]
+}
