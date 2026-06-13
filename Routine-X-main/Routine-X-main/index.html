@@ -104,6 +104,20 @@
           </div>
         </label>
 
+        <label class="auth-field" for="signup-password-confirm">
+          <span>Confirmar senha</span>
+          <div class="password-control">
+            <input class="auth-input" id="signup-password-confirm" type="password" autocomplete="new-password" placeholder="Confirme sua senha" required>
+            <button class="password-toggle" type="button" data-password-toggle="signup-password-confirm" aria-label="Revelar senha" aria-pressed="false">
+              <svg class="password-eye" aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M2.1 12s3.6-6.5 9.9-6.5S21.9 12 21.9 12s-3.6 6.5-9.9 6.5S2.1 12 2.1 12Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+                <path class="password-eye-slash" d="M4 4l16 16"></path>
+              </svg>
+            </button>
+          </div>
+        </label>
+
         <button class="auth-button" type="submit">Criar conta</button>
       </form>
 
@@ -145,15 +159,39 @@
         <span class="sidebar-label">Menu</span>
         <button class="sidebar-link is-active" id="workspace-menu" type="button" data-tooltip="Área de trabalho">
           <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M9 20v-6h6v6"></path></svg></span>
-          Área de trabalho
+          <span class="sidebar-link-label">Área de trabalho</span>
+          <span class="mobile-nav-label">Hoje</span>
         </button>
         <button class="sidebar-link" id="routines-menu" type="button" data-tooltip="Rotinas">
           <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M9 11H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5v18"></path><path d="M22 19a2 2 0 0 1-2 2h-7V3h7a2 2 0 0 1 2 2v14Z"></path></svg></span>
-          Rotinas
+          <span class="sidebar-link-label">Rotinas</span>
+          <span class="mobile-nav-label">Rotinas</span>
         </button>
         <button class="sidebar-link" id="statistics-menu" type="button" data-tooltip="Estatísticas">
           <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="m7 15 4-4 3 3 5-7"></path></svg></span>
-          Estatísticas
+          <span class="sidebar-link-label">Estatísticas</span>
+          <span class="mobile-nav-label">Estatísticas</span>
+        </button>
+        <button class="sidebar-link sidebar-notification-link" id="sidebar-notification-toggle" type="button" data-tooltip="Notificações" aria-label="Abrir notificações">
+          <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M10 21a2 2 0 0 0 4 0"></path><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"></path><path d="M19 4h.01"></path></svg></span>
+          <span class="sidebar-link-label">Notificações</span>
+          <span class="mobile-nav-label">Notificações</span>
+        </button>
+        <button class="sidebar-link mobile-profile-link" id="mobile-profile-menu" type="button" data-tooltip="Perfil" aria-label="Abrir perfil">
+          <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M20 21a8 8 0 1 0-16 0"></path><circle cx="12" cy="7" r="4"></circle></svg></span>
+          <span class="sidebar-link-label">Perfil</span>
+          <span class="mobile-nav-label">Perfil</span>
+        </button>
+      </nav>
+
+      <nav class="sidebar-section sidebar-drawer-section" aria-label="Opções do menu">
+        <button class="sidebar-link" id="sidebar-settings-link" type="button" data-tooltip="Configurações">
+          <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 8.89a1.7 1.7 0 0 0-.34-1.88l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6 1.7 1.7 0 0 0 10 3.04V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.2.62.77 1.03 1.43 1.03H21a2 2 0 1 1 0 4h-.09A1.7 1.7 0 0 0 19.4 15Z"></path></svg></span>
+          Configurações
+        </button>
+        <button class="sidebar-link" id="sidebar-help-link" type="button" data-tooltip="Ajuda e suporte">
+          <span class="nav-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9.1 9a3 3 0 1 1 5.4 1.8c-.9.7-1.5 1.2-1.5 2.2"></path><path d="M12 17h.01"></path></svg></span>
+          Ajuda e suporte
         </button>
       </nav>
 
@@ -177,6 +215,9 @@
     <section class="dashboard-main" aria-labelledby="daily-title">
       <header class="dashboard-header" id="daily-header">
         <div class="dashboard-topbar">
+          <div class="mobile-screen-title" aria-hidden="true">
+            <strong id="mobile-view-title">Hoje</strong>
+          </div>
           <div class="dashboard-greeting">
             <span class="greeting-avatar" aria-hidden="true">
               <svg class="ui-icon" viewBox="0 0 24 24"><path d="M7 11v8a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-8"></path><path d="M5 11h14"></path><path d="m12 3 7 8H5l7-8Z"></path></svg>
@@ -245,6 +286,21 @@
               <small>tarefas</small>
             </div>
           </article>
+          <article class="stat-card mobile-overdue-stat">
+            <span class="stat-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24"><path d="M10 2h4"></path><path d="M12 14v-4"></path><path d="M4 13a8 8 0 1 0 16 0 8 8 0 0 0-16 0Z"></path><path d="M12 17h.01"></path></svg></span>
+            <div>
+              <span>Atrasadas</span>
+              <strong id="stat-overdue">0</strong>
+              <small>tarefas</small>
+            </div>
+          </article>
+        </div>
+
+        <div class="mobile-status-chips" aria-label="Filtrar tarefas por status">
+          <button class="mobile-status-chip is-active" type="button" data-status-filter="all" aria-pressed="true">Todas</button>
+          <button class="mobile-status-chip" type="button" data-status-filter="pending" aria-pressed="false">Pendentes</button>
+          <button class="mobile-status-chip" type="button" data-status-filter="completed" aria-pressed="false">Concluídas</button>
+          <button class="mobile-status-chip" type="button" data-status-filter="overdue" aria-pressed="false">Atrasadas</button>
         </div>
 
         <div class="dashboard-filterbar">
@@ -343,7 +399,7 @@
       </section>
 
       <section class="statistics-view" id="statistics-view" aria-labelledby="statistics-title" hidden>
-        <header class="statistics-header" hidden>
+        <header class="statistics-header">
           <div class="statistics-heading">
             <span class="greeting-avatar statistics-avatar" aria-hidden="true">
               <svg class="ui-icon" viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="m7 15 4-4 3 3 5-7"></path></svg>
@@ -362,10 +418,10 @@
           </label>
         </header>
 
-        <div class="statistics-toolbar" hidden>
-          <label class="date-filter statistics-period-filter" for="statistics-period-filter-hidden">
+        <div class="statistics-toolbar">
+          <label class="date-filter statistics-period-filter" for="statistics-period-filter-toolbar">
             <span><svg class="ui-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4"></path><path d="M8 2v4"></path><path d="M3 10h18"></path></svg> Período</span>
-            <select id="statistics-period-filter-hidden">
+            <select id="statistics-period-filter-toolbar">
               <option value="today">Hoje</option>
               <option value="yesterday">Ontem</option>
               <option value="last7" selected>Últimos 7 dias</option>
@@ -377,7 +433,7 @@
           <p id="statistics-period-copy">Dados salvos por dia para preservar seu histórico.</p>
         </div>
 
-        <div class="statistics-summary" aria-label="Resumo de estatísticas" hidden>
+        <div class="statistics-summary" aria-label="Resumo de estatísticas">
           <article class="stat-card">
             <span class="stat-icon progress-ring" id="statistics-summary-ring" aria-hidden="true"></span>
             <div>
@@ -527,7 +583,19 @@
                 </select>
               </label>
             </div>
+            <span class="statistics-chip statistics-evolution-period" id="statistics-evolution-period">Período</span>
             <div class="statistics-bars" id="statistics-evolution-bars"></div>
+          </article>
+
+          <article class="statistics-card statistics-card-wide heatmap-card">
+            <div class="statistics-card-heading">
+              <div>
+                <span class="dashboard-kicker">Horários</span>
+                <h2>Picos de foco</h2>
+                <p>Leitura rápida dos períodos com mais tarefas concluídas.</p>
+              </div>
+            </div>
+            <div class="statistics-heatmap" id="statistics-heatmap" aria-label="Mapa de calor por período do dia"></div>
           </article>
 
         </div>
@@ -635,6 +703,11 @@
 
             <label>
               <span>Prioridade</span>
+              <div class="priority-segmented-control" aria-label="Prioridade da tarefa">
+                <button class="priority-choice is-high" type="button" data-priority-choice="Alta" aria-pressed="false">Alta</button>
+                <button class="priority-choice is-medium is-selected" type="button" data-priority-choice="Média" aria-pressed="true">Média</button>
+                <button class="priority-choice is-low" type="button" data-priority-choice="Baixa" aria-pressed="false">Baixa</button>
+              </div>
               <select id="task-priority">
                 <option value="Baixa">Baixa</option>
                 <option value="Média" selected>Média</option>

@@ -32,14 +32,17 @@ const footer = document.getElementById("auth-footer");
 const footerText = document.getElementById("auth-footer-text");
 const modeButton = document.getElementById("auth-mode-button");
 const signupName = document.getElementById("signup-name");
+const signupAge = document.getElementById("signup-age");
 const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
+const signupPasswordConfirm = document.getElementById("signup-password-confirm");
 const loginEmail = document.getElementById("login-email");
 const loginPassword = document.getElementById("login-password");
 const passwordToggles = document.querySelectorAll("[data-password-toggle]");
 
 const selectedDate = document.getElementById("selected-date");
 const priorityFilter = document.getElementById("priority-filter");
+const statusFilterButtons = document.querySelectorAll("[data-status-filter]");
 const taskSearch = document.getElementById("task-search");
 const sortFilter = document.getElementById("sort-filter");
 const dailyTitle = document.getElementById("daily-title");
@@ -51,6 +54,7 @@ const statTotal = document.getElementById("stat-total");
 const statCompleted = document.getElementById("stat-completed");
 const statProgress = document.getElementById("stat-progress");
 const statFolders = document.getElementById("stat-folders");
+const statOverdue = document.getElementById("stat-overdue");
 const statProgressRing = document.getElementById("stat-progress-ring");
 const resetFilters = document.getElementById("reset-filters");
 const favoriteFilter = document.getElementById("favorite-filter");
@@ -75,6 +79,7 @@ const taskCategoryColor = document.getElementById("task-category-color");
 const taskIconChoice = document.getElementById("task-icon-choice");
 const taskTempo = document.getElementById("task-tempo");
 const taskPriority = document.getElementById("task-priority");
+const taskPriorityChoices = document.querySelectorAll("[data-priority-choice]");
 const taskStatus = document.getElementById("task-status");
 const taskNotes = document.getElementById("task-notes");
 const taskCreatePreview = document.getElementById("task-create-preview");
@@ -122,7 +127,11 @@ const sidebarNotificationToggle = document.getElementById("sidebar-notification-
 const workspaceMenu = document.getElementById("workspace-menu");
 const routinesMenu = document.getElementById("routines-menu");
 const statisticsMenu = document.getElementById("statistics-menu");
+const mobileProfileMenu = document.getElementById("mobile-profile-menu");
+const sidebarSettingsLink = document.getElementById("sidebar-settings-link");
+const sidebarHelpLink = document.getElementById("sidebar-help-link");
 const dailyHeader = document.getElementById("daily-header");
+const mobileViewTitle = document.getElementById("mobile-view-title");
 const dailyTimeline = document.getElementById("daily-timeline");
 const routinesView = document.getElementById("routines-view");
 const statisticsView = document.getElementById("statistics-view");
@@ -152,6 +161,7 @@ const statisticsEvolutionPeriod = document.getElementById("statistics-evolution-
 const statisticsInsights = document.getElementById("statistics-insights");
 const statisticsSearchInput = document.getElementById("statistics-search");
 const statisticsPeriodFilter = document.getElementById("statistics-period-filter");
+const statisticsPeriodFilterToolbar = document.getElementById("statistics-period-filter-toolbar");
 const statisticsPeriodCopy = document.getElementById("statistics-period-copy");
 const statisticsHistoryList = document.getElementById("statistics-history-list");
 const statisticsCalendarAction = document.getElementById("statistics-calendar-action");
@@ -202,6 +212,7 @@ let appState = readAppState();
 let currentMode = "login";
 let activeCategory = "all";
 let activePriority = "all";
+let activeStatus = "all";
 let activeSearch = "";
 let activeSort = "chronological";
 let activeFavoriteOnly = false;
@@ -470,6 +481,7 @@ function migrateLegacyState() {
   const user = {
     id: createId(),
     name: legacyName || "Usuário",
+    age: "",
     email: "usuario@local.app",
     password: "123456",
     settings: {
@@ -501,6 +513,7 @@ function getProfilePayload(user = getCurrentUser()) {
 
   return {
     nome: user.name,
+    idade: user.age || "",
     email: user.email,
     avatarImage: user.avatarImage || "",
     folders: user.folders || [],
@@ -635,6 +648,7 @@ function updateCurrentUser(updater) {
 function resetSessionViewState() {
   activeCategory = "all";
   activePriority = "all";
+  activeStatus = "all";
   activeSearch = "";
   activeSort = "chronological";
   expandedTaskId = null;
@@ -654,6 +668,7 @@ function resetSessionViewState() {
   if (categoryFilter) categoryFilter.value = "all";
   if (selectedDate) selectedDate.value = getTodayDate();
   if (taskDate) taskDate.value = selectedDate.value;
+  syncStatusFilterButtons();
 }
 
 function uiIcon(name) {
@@ -701,6 +716,7 @@ function uiIcon(name) {
 function resetWorkspaceFilters() {
   activeCategory = "all";
   activePriority = "all";
+  activeStatus = "all";
   activeSearch = "";
   activeSort = "chronological";
   activeFavoriteOnly = false;
@@ -710,6 +726,7 @@ function resetWorkspaceFilters() {
   sortFilter.value = "chronological";
   categoryFilter.value = "all";
   syncFavoriteFilterButton();
+  syncStatusFilterButtons();
   syncPriorityFilterColor();
   syncCustomSelects();
   renderDashboard();
@@ -721,11 +738,31 @@ function syncFavoriteFilterButton() {
   favoriteFilter.setAttribute("aria-pressed", String(activeFavoriteOnly));
 }
 
+function syncStatusFilterButtons() {
+  statusFilterButtons.forEach((button) => {
+    const isActive = button.dataset.statusFilter === activeStatus;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
 function getTaskDateTime(task) {
   if (!task?.date) return null;
 
   const date = new Date(`${task.date}T${task.time || "00:00"}:00`);
   return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function isTaskOverdue(task) {
+  const dueDate = getTaskDateTime(task);
+  return Boolean(dueDate && !task.isCompleted && task.status !== "Concluída" && dueDate < new Date());
+}
+
+function taskMatchesActiveStatus(task) {
+  if (activeStatus === "completed") return task.isCompleted || task.status === "Concluída";
+  if (activeStatus === "pending") return !task.isCompleted && task.status !== "Concluída";
+  if (activeStatus === "overdue") return isTaskOverdue(task);
+  return true;
 }
 
 function getRelativeTime(value) {
@@ -1205,6 +1242,7 @@ function normalizeUser(user) {
 
   return {
     ...user,
+    age: user.age || user.idade || "",
     avatarImage: user.avatarImage || "",
     settings: {
       theme: "dark",
@@ -1848,6 +1886,7 @@ function isGeneralCategory(name) {
 function taskMatchesActiveFilters(task) {
   return (activeCategory === "all" || task.categoryName === activeCategory)
     && (activePriority === "all" || task.priority === activePriority)
+    && taskMatchesActiveStatus(task)
     && (!activeFavoriteOnly || task.isFavorite)
     && task.title.toLowerCase().includes(activeSearch);
 }
@@ -1880,7 +1919,7 @@ function getVisibleFolders() {
   const user = getCurrentUser();
   const folders = user?.folders || [];
 
-  if (activeCategory === "all" && activePriority === "all" && !activeSearch) {
+  if (activeCategory === "all" && activePriority === "all" && activeStatus === "all" && !activeSearch) {
     return folders;
   }
 
@@ -2144,12 +2183,21 @@ function updateTaskVisualPreview() {
   });
 }
 
+function syncTaskPriorityChoices() {
+  taskPriorityChoices.forEach((button) => {
+    const isSelected = button.dataset.priorityChoice === taskPriority.value;
+    button.classList.toggle("is-selected", isSelected);
+    button.setAttribute("aria-pressed", String(isSelected));
+  });
+}
+
 function updateProgress() {
   const user = getCurrentUser();
   const tasks = user?.tasks || [];
   const total = tasks.length;
   const completed = getCompletedTasks(tasks).length;
   const pending = tasks.filter((task) => !task.isCompleted && task.status !== "Concluída").length;
+  const overdue = tasks.filter(isTaskOverdue).length;
   const completedToday = getCompletedTasks(tasks).filter((task) => getCompletedDate(task) === getTodayDate()).length;
   const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
 
@@ -2160,6 +2208,7 @@ function updateProgress() {
   statCompleted.textContent = String(completedToday);
   statProgress.textContent = `${percent}%`;
   statFolders.textContent = String(pending);
+  if (statOverdue) statOverdue.textContent = String(overdue);
   statProgressRing.style.setProperty("--progress-value", `${percent}%`);
 }
 
@@ -2506,7 +2555,8 @@ function renderStatistics() {
     ? "Novo"
     : `${data.weeklyGrowth > 0 ? "+" : ""}${data.weeklyGrowth}%`;
 
-  statisticsPeriodFilter && (statisticsPeriodFilter.value = activeStatisticsPeriod);
+  if (statisticsPeriodFilter) statisticsPeriodFilter.value = activeStatisticsPeriod;
+  if (statisticsPeriodFilterToolbar) statisticsPeriodFilterToolbar.value = activeStatisticsPeriod;
   if (statisticsCompletionPeriod) statisticsCompletionPeriod.textContent = data.periodLabel;
   if (statisticsEvolutionPeriod) statisticsEvolutionPeriod.textContent = data.periodLabel;
   if (statisticsPeriodCopy) {
@@ -3499,15 +3549,23 @@ function renderDashboard() {
   restoreBoardScrollState(scrollState);
 }
 
+function syncPrimaryNavButtons() {
+  workspaceMenu.classList.toggle("is-active", activeView === "workspace");
+  routinesMenu.classList.toggle("is-active", activeView === "routines");
+  statisticsMenu.classList.toggle("is-active", activeView === "statistics");
+  mobileProfileMenu?.classList.remove("is-active");
+}
+
 function setActiveSidebarView(view) {
   if (activeView !== view) {
     closeTransientPanels();
   }
 
   activeView = view;
-  workspaceMenu.classList.toggle("is-active", view === "workspace");
-  routinesMenu.classList.toggle("is-active", view === "routines");
-  statisticsMenu.classList.toggle("is-active", view === "statistics");
+  if (mobileViewTitle) {
+    mobileViewTitle.textContent = view === "workspace" ? "Hoje" : view === "routines" ? "Rotinas" : "Estatísticas";
+  }
+  syncPrimaryNavButtons();
   setHiddenState(dailyHeader, view !== "workspace");
   setHiddenState(dailyTimeline, view !== "workspace");
   setHiddenState(routinesView, view !== "routines");
@@ -3841,6 +3899,7 @@ function aplicarPerfilRemoto(usuario, perfil) {
       ...(currentUser || {}),
       id: usuario.uid,
       name: perfil?.nome || currentUser?.name || usuario.email.split("@")[0],
+      age: perfil?.idade || currentUser?.age || "",
       email: perfil?.email || usuario.email,
       avatarImage: perfil?.avatarImage || currentUser?.avatarImage || "",
       settings: {
@@ -4005,41 +4064,6 @@ async function saveRoutineEdit(form) {
   renderRoutineCalendar();
   renderDashboard();
   openRoutineDetail(routineId);
-
-  return;
-
-  updateCurrentUser((user) => ({
-    ...user,
-    tasks: user.tasks.map((task) => {
-      if (task.id !== routineId) return task;
-      const tempo = formData.get("tempo");
-
-      return normalizeTask({
-        ...task,
-        title: formData.get("title").trim(),
-        date: formData.get("date"),
-        time: formData.get("time").trim(),
-        categoryName: formData.get("category").trim(),
-        status: formData.get("status"),
-        tempo,
-        etiqueta: tempo,
-        description: formData.get("description").trim(),
-        notes: formData.get("notes").trim(),
-        routineChecklist: formData.get("checklist")
-          .split("\n")
-          .map((item) => item.trim())
-          .filter(Boolean),
-      });
-    }),
-  }));
-
-  selectedRoutineDate = formData.get("date");
-  routineWeekStart = getStartOfWeek(new Date(`${selectedRoutineDate}T12:00:00`));
-
-  renderRoutineWeek();
-  renderRoutineCalendar();
-  renderDashboard();
-  openRoutineDetail(routineId);
 }
 
 function showDashboard() {
@@ -4093,6 +4117,7 @@ function openModal(targetFolderId = "") {
   setHiddenState(taskModal, false);
   taskDate.value = getTodayDate();
   renderIconSuggestions();
+  syncTaskPriorityChoices();
   updateTaskVisualPreview();
   enhanceFilterSelects(taskModal);
   syncCustomSelects();
@@ -4108,6 +4133,7 @@ function closeModal() {
   taskPriority.value = "Média";
   taskStatus.value = "Pendente";
   if (taskIconChoice) taskIconChoice.value = "";
+  syncTaskPriorityChoices();
   updateTaskVisualPreview();
 }
 
@@ -4251,11 +4277,13 @@ async function createTask() {
 
     activeCategory = "all";
     activePriority = "all";
+    activeStatus = "all";
     activeSearch = "";
     activeFavoriteOnly = false;
     priorityFilter.value = "all";
     taskSearch.value = "";
     syncFavoriteFilterButton();
+    syncStatusFilterButtons();
     syncPriorityFilterColor();
     pendingTargetFolderId = "";
     closeModal();
@@ -4451,11 +4479,13 @@ async function updateTask(form) {
 
     activeCategory = "all";
     activePriority = "all";
+    activeStatus = "all";
     activeSearch = "";
     activeFavoriteOnly = false;
     priorityFilter.value = "all";
     taskSearch.value = "";
     syncFavoriteFilterButton();
+    syncStatusFilterButtons();
     syncPriorityFilterColor();
     renderDashboard();
     renderRoutineWeek();
@@ -4525,9 +4555,11 @@ async function updateTask(form) {
   if (updatedTask) {
     activeCategory = "all";
     activePriority = "all";
+    activeStatus = "all";
     activeSearch = "";
     priorityFilter.value = "all";
     taskSearch.value = "";
+    syncStatusFilterButtons();
     syncPriorityFilterColor();
   }
 
@@ -4878,16 +4910,24 @@ function openFolderView(folderId) {
 async function createAccount() {
   const email = signupEmail.value.trim().toLowerCase();
   const senha = signupPassword.value;
+  const senhaConfirmada = signupPasswordConfirm?.value || "";
   const nome = signupName.value.trim();
+  const idade = signupAge?.value.trim() || "";
+
+  if (senha !== senhaConfirmada) {
+    setFeedback("As senhas precisam ser iguais.");
+    return;
+  }
 
   try {
-    const usuario = await criarConta(nome, email, senha);
+    const usuario = await criarConta(nome, email, senha, idade);
 
     usuarioLogado = usuario;
     appState.users = [
       normalizeUser({
         id: usuario.uid,
         name: nome,
+        age: idade,
         email,
         settings: {
           theme: "dark",
@@ -4928,37 +4968,6 @@ async function createAccount() {
     setFeedback(`Erro ao criar conta: ${error.code || error.message}`);
   }
 
-  return;
-
-  const exists = appState.users.some((user) => user.email === email);
-
-  if (exists) {
-    setFeedback("Este email já está cadastrado.");
-    return;
-  }
-
-  const user = {
-    id: createId(),
-    name: signupName.value.trim(),
-    email,
-    password: signupPassword.value,
-    settings: {
-      theme: "dark",
-      defaultViewDate: "today",
-      notificationsEnabled: true,
-      sidebarCollapsed: false,
-    },
-    avatarImage: "",
-    tasks: [],
-    folders: [],
-  };
-
-  appState.users = [...appState.users, user];
-  appState.currentUserId = user.id;
-  saveAppState();
-  resetSessionViewState();
-  signupForm.reset();
-  showDashboard();
 }
 
 async function login() {
@@ -4973,6 +4982,7 @@ async function login() {
       normalizeUser({
         id: usuario.uid,
         name: usuario.email.split("@")[0],
+        age: "",
         email: usuario.email,
         settings: {
           theme: "dark",
@@ -4996,21 +5006,6 @@ async function login() {
     setFeedback("Email ou senha invalidos.");
   }
 
-  return;
-
-  const password = loginPassword.value;
-  const user = appState.users.find((item) => item.email === email && item.password === password);
-
-  if (!user) {
-    setFeedback("Email ou senha inválidos.");
-    return;
-  }
-
-  appState.currentUserId = user.id;
-  saveAppState();
-  resetSessionViewState();
-  loginForm.reset();
-  showDashboard();
 }
 
 function openSettings() {
@@ -5029,6 +5024,11 @@ function openSettings() {
   setHiddenState(settingsModal, false);
   enhanceFilterSelects(settingsModal);
   syncCustomSelects();
+  workspaceMenu.classList.remove("is-active");
+  routinesMenu.classList.remove("is-active");
+  statisticsMenu.classList.remove("is-active");
+  mobileProfileMenu?.classList.add("is-active");
+  closeMobileSidebar();
   settingsProfileCard.focus();
 }
 
@@ -5038,6 +5038,7 @@ function closeSettings() {
   pendingAvatarImage = "";
   updateSettingsAvatarPreview("");
   resetPasswordVisibility(settingsPassword);
+  syncPrimaryNavButtons();
 }
 
 function updateSettingsAvatarPreview(image = pendingAvatarImage || getCurrentUser()?.avatarImage || "") {
@@ -5268,11 +5269,25 @@ function bindEvents() {
     syncFavoriteFilterButton();
     renderDashboard();
   });
+  statusFilterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeStatus = button.dataset.statusFilter || "all";
+      expandedTaskId = null;
+      syncStatusFilterButtons();
+      renderDashboard();
+    });
+  });
   sidebarToggle.addEventListener("click", toggleSidebar);
   sidebarNotificationToggle?.addEventListener("click", (event) => {
     event.stopPropagation();
     syncSmartNotifications();
     toggleNotificationPanel();
+  });
+  mobileProfileMenu?.addEventListener("click", openSettings);
+  sidebarSettingsLink?.addEventListener("click", openSettings);
+  sidebarHelpLink?.addEventListener("click", () => {
+    closeMobileSidebar();
+    showToast("Ajuda e suporte em preparação.", "success");
   });
   workspaceMenu.addEventListener("click", showWorkspaceView);
   routinesMenu.addEventListener("click", showRoutinesView);
@@ -5435,7 +5450,16 @@ function bindEvents() {
   });
   closeTaskModal.addEventListener("click", closeModal);
   taskModal.addEventListener("click", (event) => {
+    const priorityChoice = event.target.closest("[data-priority-choice]");
     const suggestionButton = event.target.closest("[data-visual-key]");
+
+    if (priorityChoice) {
+      taskPriority.value = priorityChoice.dataset.priorityChoice || "Média";
+      syncTaskPriorityChoices();
+      syncCustomSelects();
+      return;
+    }
+
     if (suggestionButton) {
       const visual = categoryVisuals.find((item) => item.key === suggestionButton.dataset.visualKey);
       if (!visual) return;
@@ -5455,6 +5479,7 @@ function bindEvents() {
   [taskTitle, taskDescription, taskCategoryName, taskCategoryColor, taskNotes].forEach((field) => {
     field.addEventListener("input", updateTaskVisualPreview);
   });
+  taskPriority.addEventListener("change", syncTaskPriorityChoices);
 
   taskForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -5484,12 +5509,14 @@ function bindEvents() {
   });
 
   statisticsSearchInput?.addEventListener("input", applyStatisticsSearch);
-  statisticsPeriodFilter?.addEventListener("change", () => {
-    activeStatisticsPeriod = statisticsPeriodFilter.value || "last7";
+  const handleStatisticsPeriodChange = (event) => {
+    activeStatisticsPeriod = event.currentTarget.value || "last7";
     expandedStatisticsDay = "";
     renderStatistics();
     syncCustomSelects();
-  });
+  };
+  statisticsPeriodFilter?.addEventListener("change", handleStatisticsPeriodChange);
+  statisticsPeriodFilterToolbar?.addEventListener("change", handleStatisticsPeriodChange);
   statisticsHistoryList?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-statistics-day]");
     if (!button) return;
@@ -5834,7 +5861,7 @@ function resetPasswordVisibility(input) {
 }
 
 function resetAllPasswordVisibility() {
-  [loginPassword, signupPassword, settingsPassword].forEach(resetPasswordVisibility);
+  [loginPassword, signupPassword, signupPasswordConfirm, settingsPassword].forEach(resetPasswordVisibility);
 }
 
 function init() {

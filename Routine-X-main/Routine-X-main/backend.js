@@ -24,12 +24,13 @@ export function observarUsuarioLogado(callback) {
   return onAuthStateChanged(auth, callback);
 }
 
-export async function criarConta(nome, email, senha) {
+export async function criarConta(nome, email, senha, idade = "") {
   const credencial = await createUserWithEmailAndPassword(auth, email, senha);
   const usuario = credencial.user;
 
   await setDoc(doc(db, "usuarios", usuario.uid), {
     nome,
+    idade,
     email,
     avatarImage: "",
     folders: [],
