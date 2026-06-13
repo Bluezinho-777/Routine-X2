@@ -9561,3 +9561,355 @@ html.is-theme-changing *::after {
 .dashboard-shell.is-sidebar-collapsed [data-tooltip]:focus-visible {
   z-index: 230;
 }
+
+/* Cross-device responsiveness layer */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg,
+canvas,
+video {
+  max-width: 100%;
+}
+
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  button,
+  .sidebar-link,
+  .category-filter,
+  .custom-select-button,
+  .routine-icon-button,
+  .theme-toggle,
+  .notification-toggle,
+  .modal-close,
+  .task-save-button,
+  .task-delete-button,
+  .reset-filters-button {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .auth-container {
+    min-height: auto;
+    overflow-x: hidden;
+  }
+
+  .auth-showcase,
+  .auth-card,
+  .dashboard-main,
+  .routines-view,
+  .statistics-view,
+  .task-modal,
+  .task-editor-modal,
+  .settings-modal {
+    max-width: 100%;
+  }
+
+  .dashboard-topbar,
+  .dashboard-stats,
+  .statistics-summary,
+  .statistics-grid,
+  .settings-form,
+  .task-form,
+  .task-editor-form {
+    min-width: 0;
+  }
+
+  .top-search {
+    width: 100%;
+  }
+
+  .notification-panel {
+    right: 0;
+    width: min(420px, calc(100vw - 32px));
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-shell,
+  .dashboard-shell.is-sidebar-collapsed {
+    display: block;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .sidebar-toggle,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: 260;
+  }
+
+  .dashboard-sidebar,
+  .dashboard-shell.is-sidebar-collapsed .dashboard-sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 210;
+    width: 100%;
+    height: auto;
+    max-height: none;
+    padding: 68px 14px 14px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    overflow: visible;
+  }
+
+  .dashboard-shell.is-sidebar-collapsed .sidebar-logo,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-secondary-section,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-theme-toggle,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-logout,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-label,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-inline-label {
+    display: flex;
+  }
+
+  .dashboard-shell.is-sidebar-collapsed .sidebar-user > div,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-user-icon,
+  .dashboard-shell.is-sidebar-collapsed .sidebar-link > :not(.nav-icon),
+  .dashboard-shell.is-sidebar-collapsed .category-filter > :not(.nav-icon):not(.category-visual-icon) {
+    display: initial;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dashboard-sidebar .sidebar-section {
+    gap: 8px;
+  }
+
+  .dashboard-sidebar .sidebar-primary-section {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dashboard-sidebar .sidebar-primary-section .sidebar-label {
+    grid-column: 1 / -1;
+  }
+
+  .sidebar-link,
+  .sidebar-logout,
+  .sidebar-theme-toggle,
+  .category-filter {
+    width: 100%;
+  }
+
+  .dashboard-main {
+    width: 100%;
+    padding: 20px 14px 112px;
+    overflow-x: hidden;
+  }
+
+  .dashboard-greeting,
+  .dashboard-filterbar,
+  .timeline-heading,
+  .statistics-card-heading,
+  .modal-header,
+  .task-editor-heading {
+    min-width: 0;
+  }
+
+  .dashboard-greeting h1,
+  .routines-header h1,
+  .statistics-card h2,
+  .modal-header h2,
+  .task-editor-heading h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .timeline-list,
+  .workspace-board,
+  .routine-week-grid,
+  .statistics-grid,
+  .statistics-history-list {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .floating-action {
+    right: 14px;
+    bottom: 16px;
+    max-width: calc(100vw - 28px);
+  }
+
+  .modal-backdrop {
+    align-items: flex-start;
+    padding: 14px;
+    overflow-y: auto;
+  }
+
+  .task-modal,
+  .task-editor-modal,
+  .settings-modal {
+    width: 100%;
+    max-height: none;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .auth-container {
+    display: block;
+    min-height: 100svh;
+    padding: 14px;
+  }
+
+  .auth-showcase {
+    margin-bottom: 14px;
+  }
+
+  .showcase-logo .brand-word {
+    font-size: clamp(40px, 14vw, 58px);
+  }
+
+  .brand-symbol {
+    transform-origin: left center;
+  }
+
+  .auth-brand,
+  .sidebar-logo,
+  .brand-lockup {
+    min-width: 0;
+  }
+
+  .auth-brand .brand-word,
+  .sidebar-logo .brand-word {
+    font-size: clamp(18px, 7vw, 26px);
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-sidebar .sidebar-primary-section {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-stats,
+  .statistics-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    min-width: 0;
+  }
+
+  .dashboard-filterbar,
+  .routine-week-controls,
+  .task-panel-actions,
+  .settings-actions,
+  .app-confirm-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .routine-week-controls {
+    width: 100%;
+  }
+
+  .routine-icon-button,
+  .routine-today-button,
+  .routine-calendar-button,
+  .task-save-button,
+  .task-delete-button,
+  .routine-cancel-button,
+  .modal-submit {
+    width: 100%;
+  }
+
+  .task-card,
+  .board-task-card,
+  .statistics-card,
+  .routine-day-card {
+    min-width: 0;
+  }
+
+  .task-card-summary,
+  .board-task-card .task-card-summary {
+    align-items: flex-start;
+  }
+
+  .task-title,
+  .task-description,
+  .task-date,
+  .task-etiqueta,
+  .folder-preview-name {
+    overflow-wrap: anywhere;
+  }
+
+  .notification-panel {
+    position: fixed;
+    inset: auto 12px 12px;
+    width: auto;
+    max-height: min(70vh, 520px);
+    overflow-y: auto;
+  }
+
+  .custom-select-menu {
+    max-height: min(48vh, 320px);
+  }
+}
+
+@media (max-width: 430px) {
+  .auth-showcase,
+  .auth-card,
+  .dashboard-main,
+  .routines-view,
+  .statistics-card,
+  .task-modal,
+  .task-editor-modal,
+  .settings-modal,
+  .app-confirm-dialog {
+    border-radius: 16px;
+  }
+
+  .dashboard-main {
+    padding-inline: 10px;
+  }
+
+  .dashboard-sidebar {
+    padding-inline: 10px;
+  }
+
+  .dashboard-topbar,
+  .dashboard-header,
+  .routines-header,
+  .statistics-card-heading,
+  .modal-header {
+    gap: 12px;
+  }
+
+  .dashboard-greeting {
+    align-items: flex-start;
+  }
+
+  .greeting-avatar,
+  .stat-icon,
+  .nav-icon {
+    flex: 0 0 auto;
+  }
+
+  .top-search kbd {
+    display: none;
+  }
+
+  .floating-action {
+    left: 10px;
+    right: 10px;
+    justify-content: center;
+    width: auto;
+  }
+
+  .floating-action strong {
+    display: inline;
+  }
+}

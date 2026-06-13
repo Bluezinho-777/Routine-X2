@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apresentação | Routine X</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="apresentacao.css">
+</head>
+<body class="presentation-body">
+  <main class="presentation-shell" aria-labelledby="presentation-title">
+    <header class="presentation-topbar">
+      <a class="presentation-brand" href="index.html" aria-label="Voltar para o Routine X">
+        <span class="brand-symbol brand-symbol-compact" aria-hidden="true">
+          <span class="brand-check"></span>
+          <span class="brand-x">X</span>
+        </span>
+        <span class="brand-word">Routine<span>X</span></span>
+      </a>
+
+      <div class="presentation-progress" aria-label="Progresso da apresentação">
+        <span id="slide-counter">Slide 1 / 20</span>
+        <div class="presentation-progress-track">
+          <span id="slide-progress"></span>
+        </div>
+      </div>
+    </header>
+
+    <section class="slides-viewport" aria-live="polite">
+      <article class="slide is-active cover-slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">1. Plataforma de organização pessoal</span>
+          <h1 id="presentation-title">Routine<span>X</span></h1>
+          <p>Centralização de estudos, trabalho, treinos, compromissos e tarefas pessoais em um único sistema.</p>
+          <div class="slide-tags">
+            <span>Planejar</span>
+            <span>Acompanhar</span>
+            <span>Concluir</span>
+          </div>
+          <div class="team-strip">
+            <span>Terceiro Lopes</span>
+            <span>Matheus Honorio</span>
+            <span>Ryan Victor</span>
+            <span>Otto Luis</span>
+          </div>
+        </div>
+        <div class="app-mockup" aria-label="Mockup do aplicativo Routine-X">
+          <aside class="mock-sidebar">
+            <strong>Routine<span>X</span></strong>
+            <small class="active">Área de trabalho</small>
+            <small>Rotinas</small>
+            <small>Estatísticas</small>
+          </aside>
+          <section class="mock-dashboard">
+            <div class="mock-topbar"></div>
+            <div class="mock-stats">
+              <span>Total<br><b>12</b></span>
+              <span>Concluídas<br><b>8</b></span>
+              <span>Progresso<br><b>67%</b></span>
+            </div>
+            <div class="mock-board">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">2. Objetivo</span>
+          <h2>Dar clareza ao dia do usuário</h2>
+          <p>Criar uma plataforma web para planejar o dia, armazenar tarefas por usuário e acompanhar o progresso diário.</p>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card"><strong>Planejar</strong><span>Registrar atividades por data, horário, categoria, prioridade, status e observações.</span></div>
+          <div class="feature-card"><strong>Guardar</strong><span>Permitir cadastro, login e armazenamento das tarefas vinculadas à conta.</span></div>
+          <div class="feature-card"><strong>Medir</strong><span>Exibir quantidade de tarefas concluídas e porcentagem de progresso.</span></div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">3. Público-alvo</span>
+          <h2>Para quem precisa organizar várias áreas</h2>
+          <p>O Routine-X atende pessoas que lidam com estudos, trabalho, treinos, projetos pessoais e compromissos recorrentes.</p>
+        </div>
+        <div class="persona-row">
+          <div><strong>Estudantes</strong><span>Provas, revisões, entregas e horários de aula.</span></div>
+          <div><strong>Profissionais</strong><span>Demandas, reuniões, prazos e organização do trabalho.</span></div>
+          <div><strong>Rotina pessoal</strong><span>Hábitos, treinos, compromissos e metas do dia.</span></div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">4. Problema</span>
+          <h2>Sem organização, a rotina vira ruído</h2>
+          <p>Muitas pessoas ainda organizam a rotina em caderno, WhatsApp, bloco de notas e memória, sem uma visão única do dia.</p>
+        </div>
+        <div class="problem-panel">
+          <span>Compromissos esquecidos</span>
+          <span>Prioridades confusas</span>
+          <span>Falta de histórico</span>
+          <span>Baixa visão de progresso</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">5. Solução</span>
+          <h2>Centralizar tudo em um dashboard</h2>
+          <p>A solução combina conta, tarefas, filtros, progresso diário, rotinas e estatísticas para transformar dados em decisões rápidas.</p>
+        </div>
+        <div class="module-map">
+          <span>Login</span>
+          <span>Dashboard</span>
+          <span>Tarefas</span>
+          <span>Pastas</span>
+          <span>Filtros</span>
+          <span>Rotinas</span>
+          <span>Estatísticas</span>
+          <span>Perfil</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">6. Frontend</span>
+          <h2>A camada que o usuário vê e usa</h2>
+          <p>O frontend é responsável por transformar a lógica do sistema em uma experiência compreensível, bonita e fácil de operar.</p>
+        </div>
+        <div class="tech-stack">
+          <div><strong>HTML</strong><span>Organiza telas, formulários, seções, modais e estrutura semântica.</span></div>
+          <div><strong>CSS</strong><span>Define tema escuro/claro, cards, sidebar, responsividade e identidade visual.</span></div>
+          <div><strong>JavaScript</strong><span>Controla eventos, filtros, renderização, modais, estatísticas e conexão com dados.</span></div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">7. Interface</span>
+          <h2>Partes principais da experiência</h2>
+          <p>O <code>index.html</code> reúne login, cadastro, dashboard, sidebar, linha do tempo, modais de tarefas e configurações.</p>
+        </div>
+        <div class="interface-map">
+          <div><b>Login e cadastro</b><span>Acesso com email e senha.</span></div>
+          <div><b>Menu lateral</b><span>Troca entre trabalho, rotinas e estatísticas.</span></div>
+          <div><b>Cards</b><span>Representam cada tarefa do usuário.</span></div>
+          <div><b>Configurações</b><span>Perfil, tema e preferências.</span></div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">8. Lógica do sistema</span>
+          <h2>JavaScript conecta tela e dados</h2>
+          <p>O <code>app.js</code> controla estado, eventos, renderização, filtros, progresso, migração de dados antigos e integração.</p>
+        </div>
+        <div class="flow-line">
+          <span>HTML/CSS exibem</span>
+          <span>app.js valida</span>
+          <span>backend.js conecta</span>
+          <span>Firebase responde</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">9. Firebase</span>
+          <h2>Serviço que sustenta autenticação e dados</h2>
+          <p>O Firebase permite criação de conta, login, sessão ativa, logout, persistência em nuvem e atualização automática das informações.</p>
+        </div>
+        <div class="firebase-card">
+          <strong>Por que é importante?</strong>
+          <span>Firebase Auth identifica o usuário com segurança.</span>
+          <span>Firestore salva perfis, configurações, pastas e tarefas.</span>
+          <span>onAuthStateChanged observa a sessão e onSnapshot sincroniza tarefas em tempo real.</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">10. Banco de dados</span>
+          <h2>Dados separados por usuário</h2>
+          <p>O Firestore organiza cada conta em um documento próprio, usando o UID gerado pela autenticação como chave principal.</p>
+        </div>
+        <div class="database-schema">
+          <code>usuarios/{uid}</code>
+          <span>nome, email, avatarImage, folders, configuracoes, criadoEm</span>
+          <code>usuarios/{uid}/tarefas/{tarefaId}</code>
+          <span>title, date, time, priority, status, category, favorite, notes</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">11. Acesso</span>
+          <h2>Fluxo de login e cadastro</h2>
+          <p>Ao criar conta, o usuário nasce no Firebase Auth e também recebe um perfil inicial dentro do Firestore.</p>
+        </div>
+        <div class="auth-flow">
+          <span>Preenche formulário</span>
+          <span>Firebase Auth registra</span>
+          <span>Firestore cria perfil</span>
+          <span>Dashboard é liberado</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">12. Criação de tarefas</span>
+          <h2>Do formulário ao quadro</h2>
+          <p>O usuário informa título, data, horário, categoria, prioridade, status e observações. Depois o app normaliza e salva no Firestore.</p>
+        </div>
+        <div class="task-flow-card">
+          <span>Formulário</span>
+          <span>Validação</span>
+          <span>criarTarefa()</span>
+          <span>Firestore</span>
+          <span>Renderização</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">13. CRUD</span>
+          <h2>Operações principais dos dados</h2>
+          <p>As funções do <code>backend.js</code> simplificam o ciclo de vida das tarefas usando os recursos nativos do Firestore.</p>
+        </div>
+        <div class="crud-grid">
+          <span><b>Criar</b><small>addDoc</small></span>
+          <span><b>Ler</b><small>onSnapshot</small></span>
+          <span><b>Editar</b><small>updateDoc</small></span>
+          <span><b>Excluir</b><small>deleteDoc</small></span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">14. Organização</span>
+          <h2>Filtros tornam o quadro útil</h2>
+          <p>Filtro por data, categoria, prioridade, favoritos, busca e ordenação reduzem a dificuldade de encontrar atividades importantes.</p>
+        </div>
+        <div class="filter-mock">
+          <span>Pesquisar tarefas</span>
+          <span>Prioridade: Alta</span>
+          <span>Categoria: Estudos</span>
+          <span>Favoritos</span>
+          <span>Ordem cronológica</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">15. Estatísticas</span>
+          <h2>Dados viram acompanhamento</h2>
+          <p>O sistema calcula indicadores para mostrar progresso diário, tarefas concluídas, pendências, média diária, categorias e consistência.</p>
+        </div>
+        <div class="stats-showcase">
+          <div><strong>67%</strong><span>Taxa de conclusão</span></div>
+          <div><strong>8</strong><span>Tarefas concluídas</span></div>
+          <div><strong>3 dias</strong><span>Sequência ativa</span></div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">16. Rotinas</span>
+          <h2>Processo de criação</h2>
+          <p>O projeto nasceu da dor da rotina espalhada, passou pela definição das telas, construção da interface, lógica e integração Firebase.</p>
+        </div>
+        <div class="process-grid">
+          <span>Dor identificada</span>
+          <span>Telas definidas</span>
+          <span>HTML e CSS</span>
+          <span>Lógica JS</span>
+          <span>Firebase</span>
+          <span>Testes CRUD</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">17. Segurança</span>
+          <h2>Cada usuário acessa seus próprios dados</h2>
+          <p>O UID do Firebase Auth é usado para buscar perfil e tarefas dentro de <code>usuarios/{uid}</code>, mantendo contas separadas.</p>
+        </div>
+        <div class="security-card">
+          <strong>Cuidados técnicos</strong>
+          <span><code>escapeHtml</code> protege a renderização contra HTML digitado pelo usuário.</span>
+          <span><code>normalizeTask</code> padroniza tarefas para evitar campos vazios.</span>
+          <span>As próximas melhorias incluem regras de segurança Firestore mais rigorosas.</span>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">18. Pontos fortes</span>
+          <h2>Resultados alcançados</h2>
+          <p>O sistema centraliza compromissos, acompanha progresso em tempo real e mantém tarefas vinculadas à conta do usuário.</p>
+        </div>
+        <div class="strengths-grid">
+          <div><strong>Visual próprio</strong><span>Marca, sidebar, cards, tema escuro e componentes consistentes.</span></div>
+          <div><strong>Persistência real</strong><span>Dados salvos no Firestore e associados ao usuário logado.</span></div>
+          <div><strong>Fluxo completo</strong><span>Login, criação, edição, filtros, rotinas, estatísticas e configurações.</span></div>
+        </div>
+      </article>
+
+      <article class="slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">19. Melhorias futuras</span>
+          <h2>Como o Routine-X pode evoluir</h2>
+          <p>As próximas versões podem reforçar segurança, lembretes, relatórios, automação e recursos avançados de tarefas.</p>
+        </div>
+        <div class="roadmap">
+          <span>Notificações reais</span>
+          <span>Recuperação de senha</span>
+          <span>Testes automatizados</span>
+          <span>Relatórios por categoria</span>
+          <span>Anexos e subtarefas</span>
+          <span>Repetição automática</span>
+        </div>
+      </article>
+
+      <article class="slide final-slide">
+        <div class="slide-copy">
+          <span class="slide-kicker">20. Conclusão</span>
+          <h2>Routine-X integra interface, lógica e dados</h2>
+          <p>O projeto resolve a dificuldade de organizar a rotina em lugares separados, combinando frontend, autenticação, banco em nuvem e atualização em tempo real.</p>
+          <a class="presentation-link" href="index.html">Abrir sistema</a>
+        </div>
+        <div class="conclusion-card">
+          <strong>Resultado final</strong>
+          <span>Uma solução visual para planejar tarefas, registrar progresso e transformar rotina em informação útil.</span>
+        </div>
+      </article>
+    </section>
+
+    <footer class="presentation-controls" aria-label="Controles dos slides">
+      <button class="control-button" id="prev-slide" type="button">Anterior</button>
+      <div class="dot-list" id="dot-list" aria-label="Selecionar slide"></div>
+      <button class="control-button control-button-primary" id="next-slide" type="button">Próximo</button>
+    </footer>
+  </main>
+
+  <script src="apresentacao.js"></script>
+</body>
+</html>
