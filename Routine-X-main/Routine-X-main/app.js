@@ -1686,8 +1686,21 @@ function applySidebarState() {
   const isCollapsed = Boolean(user?.settings.sidebarCollapsed);
 
   dashboardScreen.classList.toggle("is-sidebar-collapsed", isCollapsed);
+  dashboardScreen.classList.remove("is-mobile-sidebar-open");
   sidebarToggle.setAttribute("aria-pressed", String(isCollapsed));
   sidebarToggle.setAttribute("aria-label", isCollapsed ? "Expandir menu lateral" : "Recolher menu lateral");
+}
+
+function isMobileLayout() {
+  return window.matchMedia("(max-width: 900px)").matches;
+}
+
+function closeMobileSidebar() {
+  dashboardScreen.classList.remove("is-mobile-sidebar-open");
+  if (isMobileLayout()) {
+    sidebarToggle.setAttribute("aria-expanded", "false");
+    sidebarToggle.setAttribute("aria-label", "Abrir menu");
+  }
 }
 
 function syncCollapsedFoldersFromUser() {
@@ -1701,6 +1714,15 @@ function syncCollapsedFoldersFromUser() {
 }
 
 function toggleSidebar() {
+  if (isMobileLayout()) {
+    const shouldOpen = !dashboardScreen.classList.contains("is-mobile-sidebar-open");
+    dashboardScreen.classList.toggle("is-mobile-sidebar-open", shouldOpen);
+    sidebarToggle.setAttribute("aria-expanded", String(shouldOpen));
+    sidebarToggle.setAttribute("aria-pressed", String(shouldOpen));
+    sidebarToggle.setAttribute("aria-label", shouldOpen ? "Fechar menu" : "Abrir menu");
+    return;
+  }
+
   const nextCollapsed = !Boolean(getCurrentUser()?.settings.sidebarCollapsed);
   pendingSidebarOverride = nextCollapsed;
   clearTimeout(pendingSidebarOverrideTimer);
@@ -3491,6 +3513,7 @@ function setActiveSidebarView(view) {
   setHiddenState(routinesView, view !== "routines");
   setHiddenState(statisticsView, view !== "statistics");
   setHiddenState(openTaskModal, true);
+  closeMobileSidebar();
 }
 
 function showWorkspaceView() {
@@ -5210,6 +5233,33 @@ function bindEvents() {
     }
 
     closeNotificationPanel();
+  });
+  document.addEventListener("click", (event) => {
+    if (
+      !isMobileLayout()
+      || !dashboardScreen.classList.contains("is-mobile-sidebar-open")
+      || event.target.closest(".dashboard-sidebar")
+      || event.target.closest(".sidebar-toggle")
+    ) {
+      return;
+    }
+
+    closeMobileSidebar();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMobileSidebar();
+    }
+  });
+  window.addEventListener("resize", () => {
+    if (!isMobileLayout()) {
+      dashboardScreen.classList.remove("is-mobile-sidebar-open");
+      sidebarToggle.removeAttribute("aria-expanded");
+      applySidebarState();
+      return;
+    }
+
+    closeMobileSidebar();
   });
   sidebarThemeToggle.addEventListener("click", toggleTheme);
   resetFilters.addEventListener("click", resetWorkspaceFilters);

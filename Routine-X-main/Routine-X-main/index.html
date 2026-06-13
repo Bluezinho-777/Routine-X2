@@ -62,7 +62,11 @@
           <div class="password-control">
             <input class="auth-input" id="login-password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
             <button class="password-toggle" type="button" data-password-toggle="login-password" aria-label="Revelar senha" aria-pressed="false">
-              <span class="password-eye" aria-hidden="true"></span>
+              <svg class="password-eye" aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M2.1 12s3.6-6.5 9.9-6.5S21.9 12 21.9 12s-3.6 6.5-9.9 6.5S2.1 12 2.1 12Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+                <path class="password-eye-slash" d="M4 4l16 16"></path>
+              </svg>
             </button>
           </div>
         </label>
@@ -91,7 +95,11 @@
           <div class="password-control">
             <input class="auth-input" id="signup-password" type="password" autocomplete="new-password" placeholder="Crie uma senha" required>
             <button class="password-toggle" type="button" data-password-toggle="signup-password" aria-label="Revelar senha" aria-pressed="false">
-              <span class="password-eye" aria-hidden="true"></span>
+              <svg class="password-eye" aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M2.1 12s3.6-6.5 9.9-6.5S21.9 12 21.9 12s-3.6 6.5-9.9 6.5S2.1 12 2.1 12Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+                <path class="password-eye-slash" d="M4 4l16 16"></path>
+              </svg>
             </button>
           </div>
         </label>
@@ -107,13 +115,13 @@
   </main>
 
   <main class="dashboard-shell" id="dashboard-screen" hidden>
-    <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Recolher menu lateral" aria-pressed="false">
+    <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Recolher menu lateral" aria-pressed="false" aria-controls="mobile-sidebar">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </button>
 
-    <aside class="dashboard-sidebar" aria-label="Navegação principal">
+    <aside class="dashboard-sidebar" id="mobile-sidebar" aria-label="Navegação principal">
       <a class="sidebar-logo" href="apresentacao.html" aria-label="Abrir apresentação do Routine X">
         <span class="brand-symbol brand-symbol-compact" aria-hidden="true">
           <span class="brand-check"></span>
@@ -839,7 +847,11 @@
               <div class="password-control">
                 <input id="settings-password" type="password" placeholder="Deixe em branco para manter">
                 <button class="password-toggle" type="button" data-password-toggle="settings-password" aria-label="Revelar senha" aria-pressed="false">
-                  <span class="password-eye" aria-hidden="true"></span>
+                  <svg class="password-eye" aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M2.1 12s3.6-6.5 9.9-6.5S21.9 12 21.9 12s-3.6 6.5-9.9 6.5S2.1 12 2.1 12Z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path class="password-eye-slash" d="M4 4l16 16"></path>
+                  </svg>
                 </button>
               </div>
             </label>

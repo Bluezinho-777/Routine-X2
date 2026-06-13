@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currículo - Matheus Honorio Silva</title>
+  <style>
+    :root {
+      --navy: #18304f;
+      --navy-dark: #10253f;
+      --blue: #245bb3;
+      --text: #1f2937;
+      --muted: #586272;
+      --line: #cfd6df;
+      --paper: #ffffff;
+      --soft: #eef3fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #dfe5ec;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      display: grid;
+      grid-template-columns: 72mm 1fr;
+      background: var(--paper);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+      overflow: hidden;
+    }
+
+    .sidebar {
+      background: linear-gradient(160deg, var(--navy-dark), var(--navy));
+      color: #fff;
+      padding: 26px 22px;
+    }
+
+    .avatar {
+      width: 168px;
+      height: 168px;
+      margin: 0 auto 30px;
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      background: #f4f7fb;
+      box-shadow: 0 8px 18px rgba(4, 14, 31, 0.22);
+      object-fit: cover;
+      object-position: 50% 34%;
+    }
+
+    .side-section {
+      margin-top: 28px;
+    }
+
+    .side-title {
+      margin: 0 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.68);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .contact-item {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 10px;
+      align-items: center;
+      margin: 13px 0;
+      font-size: 14px;
+    }
+
+    .contact-icon,
+    .edu-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .icon-svg {
+      width: 1em;
+      height: 1em;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-fill {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .contact-icon .icon-svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .edu-icon .icon-svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .section-icon .icon-svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .side-list {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    .side-list li {
+      margin: 7px 0;
+    }
+
+    .education-card {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .edu-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--blue);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .education-card strong {
+      display: block;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    .education-card span {
+      display: block;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .content {
+      padding: 50px 44px 0;
+      position: relative;
+    }
+
+    .headline h1 {
+      margin: 0;
+      color: var(--navy-dark);
+      font-size: 47px;
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .role {
+      margin-top: 10px;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .accent-line {
+      height: 3px;
+      margin: 34px 0 28px;
+      background: linear-gradient(90deg, var(--blue) 0 14%, var(--line) 14% 100%);
+    }
+
+    .summary {
+      max-width: 540px;
+      margin: 0 0 36px;
+      color: #26364a;
+      font-size: 17px;
+    }
+
+    .section {
+      margin-top: 34px;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 46px max-content 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .section-icon {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .section-title {
+      color: var(--navy-dark);
+      font-size: 17px;
+      font-weight: 900;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-rule {
+      height: 1px;
+      background: #9aa7b7;
+    }
+
+    .entry {
+      padding-bottom: 22px;
+      margin-bottom: 20px;
+      border-bottom: 1px dashed #c8ced6;
+    }
+
+    .entry:last-child {
+      border-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .entry-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .entry-title {
+      margin: 0;
+      color: var(--blue);
+      font-size: 17px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .entry-date {
+      color: #2d3440;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .entry-subtitle {
+      margin: 0 0 10px;
+      color: #2d3440;
+      font-size: 15px;
+      font-style: italic;
+    }
+
+    .entry p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .entry ul {
+      margin: 9px 0 0;
+      padding-left: 19px;
+      font-size: 15px;
+    }
+
+    .entry li {
+      margin: 5px 0;
+    }
+
+    .quote {
+      margin: 42px -44px 0;
+      padding: 20px 44px;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: center;
+      background: var(--soft);
+      color: #28384c;
+      font-size: 14px;
+    }
+
+    .quote-mark {
+      color: var(--navy);
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        background: #fff;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        margin: 0;
+        grid-template-columns: 68mm 1fr;
+        box-shadow: none;
+        overflow: hidden;
+      }
+
+      .sidebar {
+        padding: 22px 18px;
+      }
+
+      .avatar {
+        width: 146px;
+        height: 146px;
+        margin-bottom: 18px;
+      }
+
+      .side-section {
+        margin-top: 20px;
+      }
+
+      .side-title {
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        font-size: 14px;
+      }
+
+      .contact-item {
+        margin: 9px 0;
+        font-size: 12px;
+      }
+
+      .side-list {
+        font-size: 12px;
+      }
+
+      .side-list li {
+        margin: 5px 0;
+      }
+
+      .education-card {
+        gap: 9px;
+        margin-top: 11px;
+        font-size: 12px;
+      }
+
+      .content {
+        padding: 36px 34px 0;
+      }
+
+      .headline h1 {
+        font-size: 38px;
+      }
+
+      .role {
+        font-size: 20px;
+      }
+
+      .accent-line {
+        margin: 24px 0 20px;
+      }
+
+      .summary {
+        margin-bottom: 24px;
+        font-size: 14px;
+      }
+
+      .section {
+        margin-top: 20px;
+      }
+
+      .section-header {
+        grid-template-columns: 40px max-content 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .section-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .section-icon .icon-svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .section-title,
+      .entry-title {
+        font-size: 14px;
+      }
+
+      .entry {
+        padding-bottom: 12px;
+        margin-bottom: 10px;
+      }
+
+      .entry-date,
+      .entry-subtitle,
+      .entry p,
+      .entry ul {
+        font-size: 12px;
+      }
+
+      .entry-subtitle {
+        margin-bottom: 6px;
+      }
+
+      .entry li {
+        margin: 3px 0;
+      }
+
+      .quote {
+        margin-top: 20px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 820px) {
+      .page {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        padding: 36px 24px 0;
+      }
+
+      .headline h1 {
+        font-size: 36px;
+      }
+
+      .role {
+        font-size: 19px;
+      }
+
+      .section-header {
+        grid-template-columns: 42px 1fr;
+      }
+
+      .section-rule {
+        grid-column: 1 / -1;
+      }
+
+      .entry-top {
+        display: block;
+      }
+
+      .entry-date {
+        display: block;
+        margin-top: 4px;
+      }
+
+      .quote {
+        margin-left: -24px;
+        margin-right: -24px;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <aside class="sidebar">
+      <img class="avatar" src="Modelo de Currículo_files/matheus-foto.png" alt="Foto de Matheus Honorio Silva">
+
+      <section class="side-section">
+        <h2 class="side-title">Contato</h2>
+        <div class="contact-item">
+          <span class="contact-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="m3 7 9 6 9-6"></path>
+            </svg>
+          </span>
+          <span>matheush1a@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.88.32 1.73.59 2.55a2 2 0 0 1-.45 2.11L8 9.63a16 16 0 0 0 6.37 6.37l1.25-1.25a2 2 0 0 1 2.11-.45c.82.27 1.67.47 2.55.59A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </span>
+          <span>(84) 99896-2466<br>(84) 99802-1330</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </span>
+          <span>Mossoró, RN</span>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Habilidades</h2>
+        <ul class="side-list">
+          <li>Facilidade para aprender</li>
+          <li>Boa comunicação</li>
+          <li>Organização e responsabilidade</li>
+          <li>Trabalho em equipe</li>
+          <li>Pontualidade</li>
+          <li>Comprometimento</li>
+          <li>Boa adaptação a novos desafios</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Formação Acadêmica</h2>
+        <div class="education-card">
+          <span class="edu-icon">
+            <svg class="icon-svg icon-fill" viewBox="0 0 100 100" aria-hidden="true">
+              <path d="M50 22 12 40l38 18 38-18L50 22z"></path>
+              <path d="M28 52v15c10 9 34 9 44 0V52L50 62 28 52z"></path>
+            </svg>
+          </span>
+          <div>
+            <strong>Ciência da Computação</strong>
+            <span>Cursando</span>
+          </div>
+        </div>
+        <div class="education-card">
+          <span class="edu-icon">
+            <svg class="icon-svg icon-fill" viewBox="0 0 100 100" aria-hidden="true">
+              <path d="M50 22 12 40l38 18 38-18L50 22z"></path>
+              <path d="M28 52v15c10 9 34 9 44 0V52L50 62 28 52z"></path>
+            </svg>
+          </span>
+          <div>
+            <strong>Ensino Médio Completo</strong>
+            <span>Escola Eliseu Viana</span>
+            <span>Conclusão: 2025</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Objetivo</h2>
+        <ul class="side-list">
+          <li>Jovem Aprendiz</li>
+          <li>Primeira oportunidade profissional</li>
+          <li>Desenvolvimento profissional</li>
+        </ul>
+      </section>
+
+      <section class="side-section">
+        <h2 class="side-title">Certificações</h2>
+        <ul class="side-list">
+          <li>Workshop de Privacidade, Segurança e Inteligência Artificial</li>
+          <li>XIV Congresso Científico UnP Mossoró</li>
+          <li>Carga horária: 5 horas</li>
+        </ul>
+      </section>
+    </aside>
+
+    <section class="content">
+      <header class="headline">
+        <h1>Matheus Honorio Silva</h1>
+        <div class="role">Jovem Aprendiz</div>
+      </header>
+
+      <div class="accent-line"></div>
+
+      <p class="summary">
+        Busco uma oportunidade como Jovem Aprendiz para desenvolver habilidades profissionais,
+        contribuir com a empresa e aprimorar meus conhecimentos, possuindo facilidade para
+        aprender e boa adaptação a novos desafios.
+      </p>
+
+      <section class="section">
+        <div class="section-header">
+          <span class="section-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M4 21c1.8-5 14.2-5 16 0"></path>
+            </svg>
+          </span>
+          <h2 class="section-title">Perfil Profissional</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <article class="entry">
+          <div class="entry-top">
+            <h3 class="entry-title">Candidato a Jovem Aprendiz</h3>
+            <span class="entry-date">Disponibilidade para aprender</span>
+          </div>
+          <p class="entry-subtitle">Primeira oportunidade profissional</p>
+          <p>
+            Perfil iniciante, com interesse em adquirir experiência, desenvolver novas
+            competências e colaborar com responsabilidade nas atividades da empresa.
+          </p>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <span class="section-icon">
+            <svg class="icon-svg icon-fill" viewBox="0 0 100 100" aria-hidden="true">
+              <path d="M50 22 12 40l38 18 38-18L50 22z"></path>
+              <path d="M28 52v15c10 9 34 9 44 0V52L50 62 28 52z"></path>
+            </svg>
+          </span>
+          <h2 class="section-title">Educação</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <article class="entry">
+          <div class="entry-top">
+            <h3 class="entry-title">Ciência da Computação</h3>
+            <span class="entry-date">Cursando</span>
+          </div>
+          <p class="entry-subtitle">Graduação em andamento</p>
+        </article>
+
+        <article class="entry">
+          <div class="entry-top">
+            <h3 class="entry-title">Ensino Médio Completo</h3>
+            <span class="entry-date">Conclusão: 2025</span>
+          </div>
+          <p class="entry-subtitle">Escola Eliseu Viana</p>
+          <p>Mossoró, RN</p>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <span class="section-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="7" width="18" height="13" rx="2"></rect>
+              <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+              <path d="M3 12h18"></path>
+            </svg>
+          </span>
+          <h2 class="section-title">Experiência Profissional</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <article class="entry">
+          <div class="entry-top">
+            <h3 class="entry-title">Em busca da primeira oportunidade</h3>
+            <span class="entry-date">Atual</span>
+          </div>
+          <p class="entry-subtitle">Jovem Aprendiz</p>
+          <ul>
+            <li>Não possuo experiência profissional formal.</li>
+            <li>Busco minha primeira oportunidade para aprender e contribuir com a empresa.</li>
+            <li>Tenho disponibilidade para desenvolver novas habilidades e assumir responsabilidades.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <span class="section-icon">
+            <svg class="icon-svg icon-fill" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m12 2.6 2.8 5.8 6.4.9-4.6 4.5 1.1 6.4-5.7-3-5.7 3 1.1-6.4-4.6-4.5 6.4-.9L12 2.6z"></path>
+            </svg>
+          </span>
+          <h2 class="section-title">Qualificações Profissionais</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <article class="entry">
+          <div class="entry-top">
+            <h3 class="entry-title">Competências Comportamentais</h3>
+          </div>
+          <ul>
+            <li>Facilidade para aprender e interesse em evoluir profissionalmente.</li>
+            <li>Boa comunicação e capacidade de trabalhar em equipe.</li>
+            <li>Organização, responsabilidade, pontualidade e comprometimento.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <span class="section-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 3h7l5 5v13H7z"></path>
+              <path d="M14 3v5h5"></path>
+              <path d="M10 13h6"></path>
+              <path d="M10 17h6"></path>
+            </svg>
+          </span>
+          <h2 class="section-title">Cursos e Certificações</h2>
+          <span class="section-rule"></span>
+        </div>
+
+        <article class="entry">
+          <div class="entry-top">
+            <h3 class="entry-title">Privacidade, Segurança e Inteligência Artificial</h3>
+            <span class="entry-date">21/05/2026</span>
+          </div>
+          <p class="entry-subtitle">Oficina/Workshop - XIV Congresso Científico da UnP Mossoró</p>
+          <p>
+            Participação em atividade de formação de competências para um mundo em transformação,
+            com carga horária total de 5 horas.
+          </p>
+        </article>
+      </section>
+
+      <footer class="quote">
+        <span class="quote-mark">"</span>
+        <span>Com dedicação, responsabilidade e vontade de aprender, busco transformar minha primeira oportunidade em crescimento profissional.</span>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
